@@ -1,0 +1,193 @@
+<main>
+    <hr>
+    <h2>Books</h2>
+    <hr>
+    <section>
+        <a class="nav-link text-primary" data-toggle="modal" data-target="#addBookModal" data-whatever="@mdo">
+            <i class="fas fa-plus-square pointer"></i> Add new Book
+        </a>
+
+        <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="addBookModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addBookModalLabel">Add new Book</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="newBook" method="POST" action="/admin/books/add">
+                            <div class="form-group">
+                                <label for="bookTitle" class="col-form-label">Title:</label>
+                                <input type="text" required="" class="form-control" id="bookTitle" name="bookTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookAuthor" class="col-form-label">Author:</label>
+                                <input type="text" required="" class="form-control" id="bookTitle" name="bookAuthor">
+                            </div>
+                            <div class="form-row">
+                                <div class="col-7">
+                                    <label for="bookCover">Cover:</label>
+                                    <input type="file" required="" class="form-control-file form-control-sm" id="bookCover" name="bookCover">
+                                </div>
+                                <div class="col">
+                                    <label for="bookCategory" class="col-form-label">Category:</label>
+                                    <select class="form-control  form-control-sm" required="" name="bookCategory" id="bookCategory">
+                                        <option>NodeJS</option>
+                                        <option>JavaScript</option>
+                                        <option>PHP</option>
+                                        <option>Java</option>
+                                        <option>C/C++</option>
+                                        <option>Linux</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bookEditor" class="col-form-label">Editor:</label>
+                                <input type="text" required="" class="form-control" id="bookEditor" name="bookEditor">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookDescription" class="col-form-label">Description:</label>
+                                <textarea class="form-control" required="" id="bookDescription" name="bookDescription"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-6">
+                                    <label for="bookPublishedAt" class="col-form-label">Published At :</label>
+                                    <input type="date" required="" class="form-control" id="bookPublishedAt" name="bookPublishedAt">
+                                </div>
+                                <div class="col-3">
+                                    <label for="bookQuantity" class="col-form-label">Quantity:</label>
+                                    <input type="number" required="" class=" form-control " id="bookQuantity" name="bookQuantity">
+
+                                </div>
+                                <div class="col-3">
+                                    <label for="bookPrice" class="col-form-label">Price: <b class="text-success">(&dollar;)</b></label>
+                                    <input type="number" required="" step="0.001" "" class=" form-control " id="bookPrice " name="bookPrice">
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="/admin/books" class="btn btn-secondary " data-dismiss="modal ">Cancel</a>
+                                <button type="submit " class="btn btn-primary ">Add</button>
+
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th scope="col ">#Index</th>
+                    <th scope="col ">bookID</th>
+                    <th scope="col ">Title</th>
+                    <th scope="col ">Author</th>
+                    <th scope="col ">Category</th>
+                    <th scope="col ">Quantity</th>
+                    <th scope="col "><i class="fas fa-edit "></i> Edit</th>
+                    <th scope="col "><i class="fas fa-trash-alt "></i> Delete</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each books as | book index | }}
+                <tr>
+                    <td scope="row ">#{{addOne index}}</td>
+                    <td>{{book._id}}</td>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.category}}</td>
+                    <td><span class="badge badge-success">{{book.stock.quantity}}</span></td>
+                    <td><button class="btn btn-primary " data-toggle="modal" data-target="#editBookModal" data-title="{{book.title}}"
+                            data-author="{{book.author}}" data-category="{{book.category}}" data-cover="{{book.cover}}" data-editor="{{book.editor}}"
+                            data-description="{{book.description}}" data-publishedat="{{formatDate book.publishedAt}}" data-quantity="{{book.stock.quantity}}"
+                            data-price="{{book.price}}" data-action="/admin/books/edit/{{book._id}}">Edit</button></td>
+                    <td> <a href="/admin/books/delete={{book._id}} " class="btn btn-danger ">Delete</a></td>
+
+                </tr>
+                {{/each}}
+                <div class="modal fade" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="editBookModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editBookModalLabel">Edit a Book</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form name="editBook" id="editBook" method="POST" action="/admin/books/edit/">
+                                    <div class="form-group">
+                                        <label for="editTitle" class="col-form-label">Title:</label>
+                                        <input type="text" required="" class="form-control" id="editTitle" name="editTitle">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editAuthor" class="col-form-label">Author:</label>
+                                        <input type="text" required="" class="form-control" id="editAuthor" name="editAuthor">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-7">
+                                            <label for="editCover">Cover:</label>
+                                            <input type="file" class="form-control-file form-control-sm" id="editCover" name="editCover">
+                                        </div>
+                                        <div class="col">
+                                            <label for="editCategory" class="col-form-label">Category:</label>
+                                            <select class="form-control  form-control-sm" required="" name="editCategory" id="editCategory">
+                                                <option>NodeJS</option>
+                                                <option>JavaScript</option>
+                                                <option>PHP</option>
+                                                <option>Java</option>
+                                                <option>C/C++</option>
+                                                <option>Linux</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editEditor" class="col-form-label">Editor:</label>
+                                        <input type="text" required="" class="form-control" id="editEditor" name="editEditor">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editDescription" class="col-form-label">Description:</label>
+                                        <textarea class="form-control" required="" id="editDescription" name="editDescription"></textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-6">
+                                            <label for="editPublishedAt" class="col-form-label">Published At :</label>
+                                            <input type="date" required="" class="form-control" id="editPublishedAt" name="editPublishedAt" value="2018-10-27">
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="editQuantity" class="col-form-label">Quantity:</label>
+                                            <input type="number" required="" class=" form-control " id="editQuantity" name="editQuantity" value="">
+
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="editPrice" class="col-form-label">Price: <b class="text-success">(&dollar;)</b></label>
+                                            <input type="number" required="" step="0.001" class=" form-control " id="editPrice" name="editPrice" value="">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="/admin/books" class="btn btn-secondary " data-dismiss="modal ">Cancel</a>
+                                        <button type="submit " class="btn btn-primary ">save</button>
+
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </tbody>
+        </table>
+
+    </section>
+</main>

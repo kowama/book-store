@@ -1,0 +1,21 @@
+<main>
+    <hr>
+    <h2>Book details</h2>
+    <hr>
+    <div class="card-group col-md-10 mx-auto">
+        <div class="card">
+            <img class="card-img-top" src="/img/upload/{{book.cover}}" alt="book cover img">
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{book.title}}</h5>
+                <p class="card-text">Category : <a href="">{{book.category}}</a></p>
+                <p class="card-text">Author : <b class="text-info">{{book.author}}</b></p>
+                <p class="card-text">Edidor : <b class="text-info">{{book.editor}}</b></p>
+                <p class="card-text">Publish At : <b class="text-muted">{{formatDate book.publishedAt}}</b></p>
+                <p class="card-text text-frame bg-light">{{book.description}}</p>
+                <a href="/store/book" class="btn btn-success">Add to Cart</a>
+                <span> Price <b class="text-success">{{book.price}}&dollar;</b></span>
+            </div>
+        </div>
+</main>

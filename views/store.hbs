@@ -1,0 +1,27 @@
+<hr>
+<hr>
+<hr>
+<main>
+    <section>
+        <hr>
+        <h2>Ours Books catalogue</h2>
+        <hr>
+        <div class="card-columns row mx-auto">
+            {{#each books as |book index|}}
+            <div class="card col-md-3" style="width: 18rem;">
+                <img class="card-img-top" src="img/upload/{{book.cover}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title text-primary text-truncate" data-toggle="tooltip" data-placement="bottom" title="{{book.title}}">{{book.title}}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item font-weight-bold text-truncate " data-toggle="tooltip" data-placement="right" title="author : {{book.author}} category: {{book.category}}">
+                            {{book.author}} | <span class="text-secondary">{{book.category}}</span>
+                        </li>
+                    </ul>
+                    <a href="store/book/{{book._id}}" class="btn btn-primary">Book details</a>
+                    <span> Price <b class="text-success">{{book.price}}&dollar;</b></span>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+</main>

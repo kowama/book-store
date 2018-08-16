@@ -14,7 +14,7 @@
                 <p class="card-text">Edidor : <b class="text-info">{{book.editor}}</b></p>
                 <p class="card-text">Publish At : <b class="text-muted">{{formatDate book.publishedAt}}</b></p>
                 <p class="card-text text-frame bg-light">{{book.description}}</p>
-                <a href="/store/book" class="btn btn-success">Add to Cart</a>
+                <a href="/cart/add/{{book._id}}" type="submit" class="btn btn-success">Add to Cart</a>
                 <span> Price <b class="text-success">{{book.price}}&dollar;</b></span>
             </div>
         </div>

@@ -11,7 +11,8 @@ router.get("/", (req, res, next) => {
     }
     res.render("store", {
       title: "store",
-      books: books.reverse()
+      books: books.reverse(),
+      cart: req.session.cart
     });
   });
 });
@@ -23,7 +24,8 @@ router.get("/book/:bookID", (req, res, next) => {
       }
       res.render("book", {
         title: "Store/book",
-        book
+        book,
+        cart: req.session.cart
       });
     })
     .catch(err => {

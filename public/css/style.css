@@ -12,3 +12,10 @@ main {
   max-height: 350px;
   overflow: auto;
 }
+.font-18 {
+  font-size: 18px;
+}
+.quantity {
+  max-width: 60px;
+  display: inline-block;
+}

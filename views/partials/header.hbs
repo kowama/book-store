@@ -70,7 +70,10 @@
                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Find</button>
             </form>
             <div class="nav-item">
-                <a class="nav-link text-secondary" href="/cart"> <i class="fas fa-shopping-cart"></i> My Cart</a>
+                <a class="nav-link text-secondary" href="/cart"> <i class="fas fa-shopping-cart"></i>
+                    {{#if cart}}
+                    <span class="badge text-danger font-18 badge-light">{{ cart.length }} </span>
+                    {{/if}} My Cart</a>
 
             </div>
             <div class="nav-item">

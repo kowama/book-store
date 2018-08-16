@@ -1,0 +1,66 @@
+<main id="main">
+    <hr>
+    <h2><i class="fas fa-shopping-cart"></i> Your shopping Cart</h2>
+    <hr>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Item</th>
+                <th scope="col">Unit price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total price</th>
+                <th scope="col">Delete</th>
+
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="4">Total somme : <b id="total" class="text-success "></b>$</td>
+                <th colspan="1"> <a href="" class="btn btn-warning"> <i class="fas fa-credit-card"></i> Buy now</a></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            {{#if cart}}
+            <!----------shit--------->
+            {{#each cart as |item index|}}
+            <tr>
+                <th scope="row">#{{addOne index}}</th>
+                <td>{{item.book.title}}</td>
+                <td>{{item.book.price}}</td>
+                <td><input type="number" class="quantity " data-unitprice="{{item.book.price}}" name="quantity" id="quantity"
+                        value="{{item.quantity}}" min="1"></td>
+                <td class="price text-success">{{price item.quantity item.book.price}}</td>
+                <td><a href="cart/delete" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
+
+            </tr>
+            {{/each}}
+            <!----------shit/END--------->
+
+            {{/if}}
+        </tbody>
+    </table>
+</main>
+<script>
+    $(".quantity").change(function (e) {
+        console.log("change : " + $(this).val());
+        const u = parseFloat($(this).data("unitprice"));
+
+        let q = parseInt($(this).val());
+
+        $(this).parent()
+            .siblings(".price").html(Number(u * q).toFixed(2));
+
+        let somme = 0;
+        $(".price").each((index, p) => {
+            somme += parseFloat(p.innerHTML);
+
+        })
+
+        $("#total").html(Number(somme).toFixed(3));
+
+
+
+    })
+
+</script>
